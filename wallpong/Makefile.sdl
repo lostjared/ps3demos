@@ -1,0 +1,11 @@
+CXX=c++
+CXX_FLAGS= -DCURRENT_PLATFORM `sdl-config --cflags` 
+LD_FLAGS= `sdl-config --libs`
+
+all:
+	$(CXX) $(CXX_FLAGS) source/wallpong.cpp -o cross/wallpong $(LD_FLAGS)
+clean:
+	rm -f cross/wallpong 
+
+run:
+	cd cross && ./wallpong && cd ..

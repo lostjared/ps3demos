@@ -1,0 +1,16 @@
+$(SDL_PATH)CXX=c++
+SDL_PATH=/opt/local
+CXX_FLAGS= -I./include -DCURRENT_PLATFORM `sdl-config --cflags`  -I$(SDL_PATH)/include
+LD_FLAGS= $(SDL_PATH)/lib/libSDL.a  $(SDL_PATH)/lib/libSDL_ttf.a $(SDL_PATH)/lib/libSDL_image.a $(SDL_PATH)/lib/libfreetype.a $(SDL_PATH)/lib/libz.a $(SDL_PATH)/lib/libbz2.a $(SDL_PATH)/lib/libSDL_mixer.a   -L$(SDL_PATH)/lib $(SDL_PATH)/lib/libSDLmain.a -Wl,-framework,AppKit  -L$(SDL_PATH)/lib -lX11 -lXext -lXrandr -lXrender -Wl,-framework,OpenGL -Wl,-framework,Cocoa -Wl,-framework,ApplicationServices -Wl,-framework,Carbon -Wl,-framework,AudioToolbox -Wl,-framework,AudioUnit -Wl,-framework,IOKit
+PROGRAM_NAME=codename_quadtris
+PROGRAM_SOURCE=
+
+all:
+	$(CXX) $(CXX_FLAGS) source/$(PROGRAM_NAME).cpp $(PROGRAM_SOURCE) -o cross/$(PROGRAM_NAME).osx $(LD_FLAGS)
+clean:
+	rm -f cross/$(PROGRAM_NAME).osx
+
+run: all
+	cd cross && ./$(PROGRAM_NAME).osx  && cd ..
+debug: all
+	cd cross && gdb ./$(PROGRAM_NAME).osx && cd ..

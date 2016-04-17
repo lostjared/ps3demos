@@ -1,0 +1,11 @@
+CXX=c++
+CXX_FLAGS= -I./include -DCURRENT_PLATFORM `sdl-config --cflags`   
+LD_FLAGS= `sdl-config --libs` -lSDL_ttf
+
+all:
+	$(CXX) $(CXX_FLAGS) source/3card.cpp -o cross/3card $(LD_FLAGS)
+clean:
+	rm -f cross/3card
+
+run: all
+	cd cross && ./3card && cd ..

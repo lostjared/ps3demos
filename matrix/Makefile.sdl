@@ -1,0 +1,11 @@
+CXX=c++
+CXX_FLAGS= -I./include -DCURRENT_PLATFORM `sdl-config --cflags`   
+LD_FLAGS= `sdl-config --libs` -lSDL_ttf
+
+all:
+	$(CXX) $(CXX_FLAGS) source/matrix.cpp -o cross/matrix $(LD_FLAGS)
+clean:
+	rm -f cross/matrix
+
+run: all
+	cd cross && ./matrix && cd ..

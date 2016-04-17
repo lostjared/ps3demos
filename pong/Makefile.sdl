@@ -1,0 +1,13 @@
+CXX=c++
+CXX_FLAGS= -DCURRENT_PLATFORM `sdl-config --cflags` 
+LD_FLAGS= `sdl-config --libs` -lSDL_ttf
+PROGRAM_NAME=pong
+all:
+	$(CXX) $(CXX_FLAGS) source/$(PROGRAM_NAME).cpp -o cross/$(PROGRAM_NAME) $(LD_FLAGS)
+clean:
+	rm -f cross/$(PROGRAM_NAME) 
+
+run: all
+	cd cross && ./$(PROGRAM_NAME) && cd ..
+debug: all
+	cd cross && gdb ./$(PROGRAM_NAME) && cd ..
